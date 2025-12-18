@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { type WeightEntry, type WeightPoint } from "./types";
+import { LineChart, XAxis, YAxis, Line, ResponsiveContainer } from "recharts";
 
 interface AddGraphicProps {
     entries: WeightEntry[];
@@ -20,7 +21,23 @@ export function AddGraphic({ entries }: AddGraphicProps) {
         weight: entry.weight,
     }));
 
+    if (points.length === 0) {
+        return <p>Недостаточно данных для графика</p>;
+    }
+    
+
     return (
-        <pre>{JSON.stringify(points, null, 2)}</pre>
+        <div style={{ width: 600, height: 200 }}>
+                <LineChart width={600} height={200} data={points}>
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Line
+                        type="monotone"
+                        dataKey="weight"
+                        stroke="#8884d8"
+                        dot={false}
+                    />
+                </LineChart>
+        </div>
     );
 }
