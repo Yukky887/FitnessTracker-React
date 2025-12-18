@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { WeightEntry } from './types'
 import { AddEntryForm } from "./AddEntryForm";
+import { AddGraphic } from "./AddGraphic";
 import './App.css'
 
 const STORAGE_KEY = 'weightEntries'
@@ -44,6 +45,7 @@ function App() {
                 <p style={{ fontSize: 32, fontWeight: 600 }}>
                     {currentWeight !== null ? `${currentWeight} кг` : "Нет данных"}
                 </p>
+                <AddGraphic entries={entries}/>
             </section>
 
             <section>
