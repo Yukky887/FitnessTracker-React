@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { type WeightEntry, type WeightPoint } from "./types";
-import { LineChart, XAxis, YAxis, Line, ResponsiveContainer } from "recharts";
+import { LineChart, XAxis, YAxis, Line } from "recharts";
 
 interface AddGraphicProps {
     entries: WeightEntry[];
@@ -14,8 +14,6 @@ export function AddGraphic({ entries }: AddGraphicProps) {
         .filter(entry => dayjs(entry.date).isAfter(thirtyDaysAgo, "day") || dayjs(entry.date).isSame(thirtyDaysAgo, "day"))
         .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf());
 
-    console.log(recentEntries)
-
     const points: WeightPoint[] = recentEntries.map(entry => ({
         date: entry.date,
         weight: entry.weight,
@@ -25,10 +23,9 @@ export function AddGraphic({ entries }: AddGraphicProps) {
         return <p>Недостаточно данных для графика</p>;
     }
     
-
     return (
-        <div style={{ width: 600, height: 200 }}>
-                <LineChart width={600} height={200} data={points}>
+        <div style={{ width: 400, height: 200 }}>
+                <LineChart width={400} height={200} data={points}>
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Line

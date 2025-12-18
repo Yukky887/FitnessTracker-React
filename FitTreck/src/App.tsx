@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import type { WeightEntry } from './types'
 import { AddEntryForm } from "./AddEntryForm";
 import { AddGraphic } from "./AddGraphic";
+import { TrainingCalendar } from "./TrainingCalendar";
 import './App.css'
 
 const STORAGE_KEY = 'weightEntries'
@@ -45,15 +46,16 @@ function App() {
                 <p style={{ fontSize: 32, fontWeight: 600 }}>
                     {currentWeight !== null ? `${currentWeight} кг` : "Нет данных"}
                 </p>
-                <AddGraphic entries={entries}/>
+                <AddGraphic entries={entries} />
             </section>
 
             <section>
-                <h2>Добавить запись</h2>
-                <AddEntryForm onAddEntry={handleAddEntry} />
+                <details>
+                    <summary>Добавить запись</summary>
+                    <AddEntryForm onAddEntry={handleAddEntry} />
+                </details>
             </section>
-
-            {/* Сюда позже подключим компонент графика WeightChart */}
+            <TrainingCalendar />
         </div>
     )
 }
