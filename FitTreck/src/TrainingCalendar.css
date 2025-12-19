@@ -1,0 +1,44 @@
+p {
+    margin: 0;
+    font-size: 11px;
+    margin-top: -3px;
+}
+
+.training-calendar-container {
+    display: grid;
+    background-color: #272727;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); 
+}
+
+.day-of-week {
+    display: grid;
+    grid-template-rows: repeat(7, 12px);
+    row-gap: 5.3px;
+    margin-right: 8px;
+    color: #5B5B5B;
+    font-size: 11px;
+}
+
+.training-calendar {
+    display: grid;
+    grid-template-rows: repeat(7, 14px);
+    grid-template-columns: repeat(25, 14px);
+    grid-auto-flow: column;
+    gap: 3px;
+}
+
+.square {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    box-shadow: inset 0.3px 1px 4px rgba(0, 0, 0, 0.6); 
+    background-color: #202020;
+}
+
+.square-active {
+    background-color: #4CAF50; 
+}

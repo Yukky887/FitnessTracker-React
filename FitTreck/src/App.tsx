@@ -39,7 +39,7 @@ function App() {
 
     return (
         <div style={{ maxWidth: 800, margin: "0 auto", padding: 24 }}>
-            <h1>Fitness Tracker</h1>
+            <h1>FitTrack</h1>
 
             <section>
                 <h2>Текущий вес</h2>
@@ -55,7 +55,7 @@ function App() {
                     <AddEntryForm onAddEntry={handleAddEntry} />
                 </details>
             </section>
-            <TrainingCalendar />
+            <TrainingCalendar workoutDates={["2025-12-19", "2025-12-18", "2025-12-15"]} />
         </div>
     )
 }
