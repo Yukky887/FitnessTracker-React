@@ -12,7 +12,7 @@ interface TrainingCalendarProps {
 }
 
 export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
-    const weeks = 25;
+    const weeks = 26;
     const days = 7;
     const rawDay = dayjs().day();
     const dayInWeek = rawDay === 0 ? 7 : rawDay;

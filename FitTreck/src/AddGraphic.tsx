@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { type WeightEntry, type WeightPoint } from "./types";
-import { LineChart, XAxis, YAxis, Line } from "recharts";
+import { LineChart, XAxis, YAxis, Line, Tooltip } from "recharts";
+import './AddGraphic.css';
 
 interface AddGraphicProps {
     entries: WeightEntry[];
@@ -15,7 +16,7 @@ export function AddGraphic({ entries }: AddGraphicProps) {
         .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf());
 
     const points: WeightPoint[] = recentEntries.map(entry => ({
-        date: entry.date,
+        date: dayjs(entry.date).format("DD.MM"),
         weight: entry.weight,
     }));
 
@@ -24,10 +25,11 @@ export function AddGraphic({ entries }: AddGraphicProps) {
     }
     
     return (
-        <div style={{ width: 400, height: 200 }}>
-                <LineChart width={400} height={200} data={points}>
-                    <XAxis dataKey="date" />
-                    <YAxis />
+        <div className="add-graphic-container">
+                <LineChart margin={{ top: 25, right: 30, left: -30, bottom: -2 }} width={400} height={300} data={points}>
+                    <Tooltip />
+                    <XAxis dataKey="date" tick={false} />
+                    <YAxis tick={false}  domain={['auto', 'auto']} />
                     <Line
                         type="monotone"
                         dataKey="weight"

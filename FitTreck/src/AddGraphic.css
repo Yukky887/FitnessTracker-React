@@ -1,0 +1,10 @@
+.add-graphic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px; 
+    height: 300px;
+    background-color: #272727;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+}
