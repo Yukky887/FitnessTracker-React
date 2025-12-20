@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import { type WeightEntry, type WeightPoint } from "./types";
 import { LineChart, XAxis, YAxis, Line, Tooltip } from "recharts";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './AddGraphic.css';
 
 interface AddGraphicProps {
@@ -8,6 +10,9 @@ interface AddGraphicProps {
 }
 
 export function AddGraphic({ entries }: AddGraphicProps) {
+    const navigate = useNavigate();
+    const [hovered, setHovered] = useState<boolean>(false);
+
     const now = dayjs();
     const thirtyDaysAgo = now.subtract(30, "day");
 
@@ -23,20 +28,35 @@ export function AddGraphic({ entries }: AddGraphicProps) {
     if (points.length === 0) {
         return <p>Недостаточно данных для графика</p>;
     }
-    
+
     return (
-        <div className="add-graphic-container">
-                <LineChart margin={{ top: 25, right: 30, left: -30, bottom: -2 }} width={400} height={300} data={points}>
-                    <Tooltip />
-                    <XAxis dataKey="date" tick={false} />
-                    <YAxis tick={false}  domain={['auto', 'auto']} />
-                    <Line
-                        type="monotone"
-                        dataKey="weight"
-                        stroke="#8884d8"
-                        dot={false}
-                    />
-                </LineChart>
+        <div className="add-graphic-container" 
+            onClick={() => {
+                navigate("/weight-stats");
+            }}>
+            <LineChart
+                onMouseEnter={() => {
+                    setHovered(true);
+                }}
+                onMouseLeave={() => {
+                    setHovered(false);
+                
+                }}
+                margin={{ top: 25, right: 30, left: -30, bottom: -2 }}
+                width={400}
+                height={300}
+                data={points}
+            >
+                <Tooltip />
+                <XAxis dataKey="date" tick={hovered} />
+                <YAxis tick={hovered} domain={['auto', 'auto']} />
+                <Line
+                    type="monotone"
+                    dataKey="weight"
+                    stroke="#8884d8"
+                    dot={false}
+                />
+            </LineChart>
         </div>
     );
 }
