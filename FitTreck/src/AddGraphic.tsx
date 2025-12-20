@@ -30,7 +30,7 @@ export function AddGraphic({ entries }: AddGraphicProps) {
     }
 
     return (
-        <div className="add-graphic-container" 
+        <div className="add-graphic-container clickable" 
             onClick={() => {
                 navigate("/weight-stats");
             }}>
@@ -48,12 +48,12 @@ export function AddGraphic({ entries }: AddGraphicProps) {
                 data={points}
             >
                 <Tooltip />
-                <XAxis dataKey="date" tick={hovered} />
-                <YAxis tick={hovered} domain={['auto', 'auto']} />
+                <XAxis axisLine={{stroke:"#202020"}} dataKey="date" tick={hovered} />
+                <YAxis axisLine={{stroke:"#202020"}} tick={hovered} domain={['auto', 'auto']} />
                 <Line
                     type="monotone"
                     dataKey="weight"
-                    stroke="#8884d8"
+                    stroke="#676767"
                     dot={false}
                 />
             </LineChart>
