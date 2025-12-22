@@ -17,7 +17,7 @@ export function useWeightStats(
                 return 180;
         }
     }
-    
+
     // НУЖНО ПОФИКСИТЬ РАСЧЕТ СРЕДНЕГО ЗА НЕДЕЛЮ И ОТОБРАЖЕНИЕ ГРАФИКА ДОЛЖНО ЗАВИСИТЬ ОТ ВЫБРАННОГО ПЕРИОДА
 
     const days = periodOfDays(period);
@@ -28,20 +28,23 @@ export function useWeightStats(
         .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf());
 
     const points: WeightPoint[] = recentEntries.map(entry => ({
-        date: dayjs(entry.date).format("DD.MM"),
+        date: entry.date,
+        label: dayjs(entry.date).format("DD.MM"),
         weight: entry.weight,
     }));
 
     const delta =
-        points.length >= 2
-            ? points[0].weight - points[points.length - 1].weight
+        recentEntries.length >= 2
+            ? recentEntries[recentEntries.length - 1].weight -
+            recentEntries[0].weight
             : null;
 
-    const avgPerWeek = 
-        delta !== null 
-            ? delta / (days / 7)
+    const avgPerWeek =
+        delta !== null && recentEntries.length >= 2
+            ? delta /
+            (dayjs(recentEntries[recentEntries.length - 1].date)
+                .diff(dayjs(recentEntries[0].date), "day") / 7)
             : null;
-
     return {
         points,
         delta,

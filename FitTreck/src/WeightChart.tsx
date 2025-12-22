@@ -1,4 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import "./WeightChart.css";
 
 export interface WeightPoint {
     date: string;
@@ -28,7 +29,7 @@ export function WeightChart({ data, showAxis = false, onClick, className, width,
                 data={data}
             >
                 <Tooltip active={isActiveTooltip} />
-                <XAxis axisLine={{ stroke: "#202020" }} dataKey="date" tick={showAxis} />
+                <XAxis axisLine={{ stroke: "#202020" }} dataKey="label" tick={showAxis} />
                 <YAxis axisLine={{ stroke: "#202020" }} tick={showAxis} domain={['auto', 'auto']} />
                 <Line
                     type="monotone"

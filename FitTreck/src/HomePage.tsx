@@ -39,7 +39,7 @@ export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setE
                 <p style={{ fontSize: 32, fontWeight: 600 }}>
                     {currentWeight !== null ? `${currentWeight} кг` : "Нет данных"}
                 </p>
-                {points.length === 0 ? (
+                {points.length <= 2 ? (
                     <p>Недостаточно данных для графика</p>
                 ) : (
                     <WeightChart

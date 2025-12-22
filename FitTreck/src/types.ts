@@ -4,6 +4,7 @@ export interface WeightEntry {
     id: string;
     points: number;
     date: ISODate;
+    label: ISODate;
     weight: number;
     notes?: string;
 }
