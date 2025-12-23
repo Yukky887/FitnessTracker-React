@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { WeightChart } from './WeightChart';
 import type { WeightEntry } from './types';
 import { useWeightStats, type Period } from './useWeightStats';
