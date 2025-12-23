@@ -3,7 +3,6 @@ import "./WeightChart.css";
 
 export interface WeightPoint {
     date: string;
-    label: string;
     weight: number;
 }
 
