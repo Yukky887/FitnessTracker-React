@@ -1,4 +1,5 @@
 import type { Period } from "./useWeightStats";
+import "./PeriodSelector.css";
 
 export function PeriodSelector({
     value,
@@ -8,7 +9,7 @@ export function PeriodSelector({
     onChange: (p: Period) => void;
 }) {
     return(
-        <div style={{ display: "flex", gap: 8 }}>
+        <div className="period-selector">
             <button onClick={() => onChange("week")} disabled={value === "week"}>
                 Неделя
             </button>

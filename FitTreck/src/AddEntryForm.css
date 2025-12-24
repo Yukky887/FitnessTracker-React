@@ -1,0 +1,7 @@
+.add-entry-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+    max-width: 400px;
+}

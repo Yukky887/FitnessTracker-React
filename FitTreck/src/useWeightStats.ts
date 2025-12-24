@@ -7,20 +7,14 @@ export function useWeightStats(
     entries: WeightEntry[],
     period: Period
 ) {
-    function periodOfDays(period: Period): number {
-        switch (period) {
-            case "week":
-                return 7;
-            case "month":
-                return 30;
-            case "half-year":
-                return 180;
-        }
-    }
+    const PERIOD_DAYS: Record<Period, number> = {
+        week: 7,
+        month: 30,
+        "half-year": 180,
+    };
 
-    // НУЖНО ПОФИКСИТЬ РАСЧЕТ СРЕДНЕГО ЗА НЕДЕЛЮ И ОТОБРАЖЕНИЕ ГРАФИКА ДОЛЖНО ЗАВИСИТЬ ОТ ВЫБРАННОГО ПЕРИОДА
+    const days = PERIOD_DAYS[period];
 
-    const days = periodOfDays(period);
     const formDate = dayjs().subtract(days, "day")
 
     const recentEntries = entries
@@ -33,6 +27,13 @@ export function useWeightStats(
         weight: entry.weight,
     }));
 
+    const daysBetween = dayjs(recentEntries[recentEntries.length - 1].date)
+        .diff(dayjs(recentEntries[0].date), "day");
+
+    if (daysBetween < 1) {
+        return null;
+    }
+
     const delta =
         recentEntries.length >= 2
             ? recentEntries[recentEntries.length - 1].weight -
@@ -42,8 +43,7 @@ export function useWeightStats(
     const avgPerWeek =
         delta !== null && recentEntries.length >= 2
             ? delta /
-            (dayjs(recentEntries[recentEntries.length - 1].date)
-                .diff(dayjs(recentEntries[0].date), "day") / 7)
+            (daysBetween / 7)
             : null;
     return {
         points,

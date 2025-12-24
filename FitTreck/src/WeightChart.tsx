@@ -1,8 +1,10 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import "./WeightChart.css";
+import { CustomTooltip } from "./CustomToltip";
 
 export interface WeightPoint {
     date: string;
+    label: string;
     weight: number;
 }
 
@@ -28,7 +30,7 @@ export function WeightChart({ data, showAxis = false, onClick, className, width,
                 height={height}
                 data={data}
             >
-                <Tooltip active={isActiveTooltip} />
+                {isActiveTooltip && <Tooltip content={<CustomTooltip />} />} 
                 <XAxis axisLine={{ stroke: "#202020" }} dataKey="label" tick={showAxis} />
                 <YAxis axisLine={{ stroke: "#202020" }} tick={showAxis} domain={['auto', 'auto']} />
                 <Line

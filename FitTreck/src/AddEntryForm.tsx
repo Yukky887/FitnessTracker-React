@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { WeightEntry } from "./types";
 import dayjs from "dayjs";
+import "./AddEntryForm.css";
 
 interface AddEntryFormProps {
     onAddEntry: (entry: Omit<WeightEntry, 'id'>) => void;
@@ -31,9 +32,9 @@ export function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12, maxWidth: 400 }}>
+        <form className="add-entry-form" onSubmit={handleSubmit}>
             <label>
-                Дата:
+                Дата: 
                 <input
                     type="date"
                     value={date}
@@ -42,7 +43,7 @@ export function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             </label>
 
             <label>
-                Вес (кг):
+                Вес (кг): 
                 <input
                     type="number"
                     step="0.1"
@@ -52,7 +53,7 @@ export function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             </label>
 
             <label>
-                Комментарий:
+                Комментарий: 
                 <input
                     type="text"
                     value={note}

@@ -1,0 +1,23 @@
+.title-stats-weight {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.weight-stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.graph-button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+
+.weight-stats {
+    font-size: 20px;
+    font-weight: normal;
+}

@@ -24,8 +24,8 @@ export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setE
         ]);
     };
 
-    const currentWeight = entries.length
-        ? entries[entries.length - 1].weight
+    const currentWeight = points.length
+        ? points[points.length - 1].weight
         : null;
 
 
