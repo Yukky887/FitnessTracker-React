@@ -5,6 +5,7 @@ import type { WeightEntry } from './types'
 import { useNavigate } from "react-router-dom";
 import { WeightChart } from "./WeightChart";
 import { useWeightStats } from "./useWeightStats";
+import "./HomePage.css";
 
 const STORAGE_KEY = 'weightEntries';
 
@@ -31,30 +32,32 @@ export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setE
 
 
     return (
-        <div className="home-page" style={{ maxWidth: 800, margin: "0 auto", padding: 24 }}>
+        <div className="home-page">
             <h1>FitTrack</h1>
 
             <section>
                 <h2>Текущий вес</h2>
-                <p style={{ fontSize: 32, fontWeight: 600 }}>
-                    {currentWeight !== null ? `${currentWeight} кг` : "Нет данных"}
-                </p>
-                {points.length <= 2 ? (
-                    <p>Недостаточно данных для графика</p>
-                ) : (
-                    <WeightChart
-                        data={points}
-                        onClick={() => navigate("/weight-stats")}
-                        showAxis={false}
-                        className="add-graphic-container clickable"
-                        width={400}
-                        height={300}
-                    />
-                )}
+                <div className="weight-overlay">
+                    <p className="current-weight">
+                        {currentWeight !== null ? `${currentWeight}` : "Нет данных"}
+                    </p>
+                    {points.length <= 2 ? (
+                        <p>Недостаточно данных для графика</p>
+                    ) : (
+                        <WeightChart
+                            data={points}
+                            onClick={() => navigate("/weight-stats")}
+                            showAxis={false}
+                            className="add-graphic-container clickable"
+                            width={400}
+                            height={300}
+                        />
+                    )}
+                </div>
             </section>
 
             <section>
-                <details>
+                <details className="entry-form-container">
                     <summary>Добавить запись</summary>
                     <AddEntryForm onAddEntry={handleAddEntry} />
                 </details>

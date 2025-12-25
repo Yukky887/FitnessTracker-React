@@ -25,7 +25,7 @@ export function WeightChart({ data, showAxis = false, onClick, className, width,
             onClick= {onClick}
         >
             <LineChart
-                margin={{ top: 25, right: 30, left: -30, bottom: -2 }}
+                margin={{ top: 25, right: 30, left: -30, bottom: -2 }}  
                 width={width}
                 height={height}
                 data={data}
@@ -34,6 +34,7 @@ export function WeightChart({ data, showAxis = false, onClick, className, width,
                 <XAxis axisLine={{ stroke: "#202020" }} dataKey="label" tick={showAxis} />
                 <YAxis axisLine={{ stroke: "#202020" }} tick={showAxis} domain={['auto', 'auto']} />
                 <Line
+                    strokeWidth={3}
                     type="monotone"
                     dataKey="weight"
                     stroke="#676767"
