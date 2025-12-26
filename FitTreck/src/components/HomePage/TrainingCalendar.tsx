@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import './TrainingCalendar.css';
+import { useNavigate } from "react-router-dom";
 
 type ISODate = string;
 
@@ -17,6 +18,8 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
     const rawDay = dayjs().day();
     const dayInWeek = rawDay === 0 ? 7 : rawDay;
     const totalCells = (weeks * days) - (7 - dayInWeek);
+
+    const navigate = useNavigate();
 
     const today = dayjs();
     const startDate = today.subtract(totalCells - 1, "day");
@@ -46,7 +49,12 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
             <div
                 className="training-calendar">
                 {cells.map((cell) => (
-                    <div key={cell.date} className={`square ${isWorkoutDate(cell.date) ? "square-active" : ""}`} title={cell.date} />
+                    <div 
+                        key={cell.date} 
+                        className={`square ${isWorkoutDate(cell.date) ? "square-active" : ""}`} 
+                        title={cell.date} 
+                        onClick={() => navigate("/training")}
+                    />
                 ))}
             </div>
         </div>

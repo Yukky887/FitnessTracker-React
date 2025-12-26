@@ -1,6 +1,6 @@
 import { WeightChart } from './WeightChart';
-import type { WeightEntry } from './types';
-import { useWeightStats, type Period } from './useWeightStats';
+import type { WeightEntry } from '../types';
+import { useWeightStats, type Period } from '../hooks/useWeightStats';
 import { PeriodSelector } from './PeriodSelector';
 import { useState } from 'react';
 import './WeightStatsPage.css';

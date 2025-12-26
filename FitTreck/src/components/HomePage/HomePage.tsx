@@ -1,22 +1,15 @@
 import { AddEntryForm } from "./AddEntryForm";
 import { TrainingCalendar } from "./TrainingCalendar";
-import { useEffect } from 'react'
-import type { WeightEntry } from './types'
+import type { WeightEntry } from '../../types'
 import { useNavigate } from "react-router-dom";
-import { WeightChart } from "./WeightChart";
-import { useWeightStats } from "./useWeightStats";
+import { WeightChart } from "../WeightChart";
+import { useWeightStats } from "../../hooks/useWeightStats";
 import "./HomePage.css";
-
-const STORAGE_KEY = 'weightEntries';
 
 export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setEntries: React.Dispatch<React.SetStateAction<WeightEntry[]>> }) {
     const navigate = useNavigate();
 
     const { points } = useWeightStats(entries, "month")
-
-    useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-    }, [entries]);
 
     const handleAddEntry = (entry: Omit<WeightEntry, 'id'>) => {
         setEntries(prev => [

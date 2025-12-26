@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import "./WeightChart.css";
-import { CustomTooltip } from "./CustomToltip";
+import { CustomTooltip } from "../CustomToltip";
 
 export interface WeightPoint {
     date: string;

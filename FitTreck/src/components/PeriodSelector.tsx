@@ -1,4 +1,4 @@
-import type { Period } from "./useWeightStats";
+import type { Period } from "../hooks/useWeightStats";
 import "./PeriodSelector.css";
 
 export function PeriodSelector({

@@ -1,26 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { HomePage } from './HomePage';
-import { WeightStatsPage } from './WeightStatsPage';
-import { useState } from 'react';
-import { type WeightEntry } from "./types";
+import { HomePage } from './components/HomePage/HomePage';
+import { WeightStatsPage } from './components/WeightStatsPage';
+import { TrainingPage } from './components/TrainingPage';
 import './App.css'
-
-const STORAGE_KEY = 'weightEntries';
+import { useWeightEntries } from './hooks/useWeightEntries';
 
 function App() {
-    const [entries, setEntries] = useState<WeightEntry[]>(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-
-        if (!stored) {
-            return [];
-        }
-
-        try {
-            return JSON.parse(stored) as WeightEntry[];
-        } catch {
-            return [];
-        }
-    });
+    const { entries, setEntries } = useWeightEntries();
 
     return (
         <Routes>
@@ -30,6 +16,9 @@ function App() {
             <Route 
                 path="/weight-stats" 
                 element={<WeightStatsPage entries={entries} />} />
+            <Route 
+                path="/training"
+                element={<TrainingPage />} />
         </Routes>
 
     )

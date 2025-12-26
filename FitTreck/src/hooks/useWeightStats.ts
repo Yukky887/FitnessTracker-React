@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { WeightEntry, WeightPoint } from "./types";
+import type { WeightEntry, WeightPoint } from "../types";
 
 export type Period = "week" | "month" | "half-year";
 

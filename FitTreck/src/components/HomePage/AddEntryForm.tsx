@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { WeightEntry } from "./types";
+import type { WeightEntry } from "../../types";
 import dayjs from "dayjs";
 import "./AddEntryForm.css";
 
