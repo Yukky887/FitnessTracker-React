@@ -24,7 +24,7 @@ export function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
         onAddEntry({
             date,
             weight: numericWeight,
-            notes: note.trim() ? note : undefined,
+            notes: note.trim() || "",
         });
 
         setWeight("");
