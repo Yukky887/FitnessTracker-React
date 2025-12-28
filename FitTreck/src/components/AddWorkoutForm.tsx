@@ -1,6 +1,7 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import type { WorkoutEntry, WorkoutType } from "../types";
+import "./AddWorkoutForm.css";
 
 interface AddWorkoutFormProps {
     defaultDate?: string;
@@ -31,24 +32,38 @@ export function AddWorkoutForm({ defaultDate, onAddWorkout }: AddWorkoutFormProp
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="date" value={date} onChange={e => setDate(e.target.value)} />
-            <select value={type} onChange={e => setType(e.target.value as WorkoutType)}>
+        <form onSubmit={handleSubmit} className="workout-form">
+            <input
+                type="date"
+                value={date}
+                onChange={e => setDate(e.target.value)}
+                className="workout-form__input workout-form__date"
+            />
+            <select
+                value={type}
+                onChange={e => setType(e.target.value as WorkoutType)}
+                className="workout-form__select"
+            >
                 <option value="Силовая">Силовая</option>
                 <option value="Кардио">Кардио</option>
                 <option value="Йога">Йога</option>
                 <option value="Другое">Другое</option>
             </select>
-            <textarea placeholder="Заметка" value={note} onChange={e => setNote(e.target.value)} />
-            <label>
-                <input 
+            <textarea
+                placeholder="Заметка"
+                value={note} onChange={e => setNote(e.target.value)}
+                className="workout-form__textarea"
+            />
+            <label className="workout-form__checkbox-label">
+                <input
                     type="checkbox"
                     checked={completed}
                     onChange={e => setCompleted(e.target.checked)}
+                    className="workout-form__checkbox"
                 />
                 Выполнена
             </label>
-            <button type="submit">Добавить тренировку</button>
+            <button className="workout-form__button" type="submit">Добавить тренировку</button>
         </form>
     );
 }

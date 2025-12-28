@@ -34,31 +34,33 @@ export function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
     return (
         <form className="add-entry-form" onSubmit={handleSubmit}>
             <label>
-                Дата: 
                 <input
                     type="date"
                     value={date}
                     onChange={e => setDate(e.target.value)}
+                    placeholder="Дата"
+                    className="workout-form__input workout-form__date"
                 />
             </label>
 
             <label>
-                Вес (кг): 
                 <input
                     type="number"
                     step="0.1"
                     value={weight}
                     onChange={e => setWeight(e.target.value)}
+                    placeholder="Ваш вес(кг)"
+                    className="workout-form__input workout-form__date"
                 />
             </label>
 
             <label>
-                Комментарий: 
                 <input
                     type="text"
                     value={note}
                     onChange={e => setNote(e.target.value)}
-                    placeholder="Опционально"
+                    placeholder="Комментарий"
+                    className="workout-form__input workout-form__date"
                 />
             </label>
 
