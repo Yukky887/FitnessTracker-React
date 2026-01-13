@@ -27,13 +27,27 @@ export function useWeightStats(
         weight: entry.weight,
     }));
 
-    const daysBetween = dayjs(recentEntries[recentEntries.length - 1].date)
-        .diff(dayjs(recentEntries[0].date), "day");
-
-    if (daysBetween < 1) {
-        return null;
+    if (recentEntries.length < 2) {
+        return {
+            points,
+            delta: null,
+            avgPerWeek: null,
+        };
     }
 
+    const first = recentEntries[0];
+    const last = recentEntries[recentEntries.length - 1];
+
+    const daysBetween = dayjs(last.date).diff(dayjs(first.date), "day")
+
+    if (recentEntries.length < 2) {
+        return {
+            points,
+            delta: null,
+            avgPerWeek: null,
+        };
+    }
+    
     const delta =
         recentEntries.length >= 2
             ? recentEntries[recentEntries.length - 1].weight -

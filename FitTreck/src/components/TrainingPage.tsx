@@ -1,11 +1,8 @@
 import { AddWorkoutForm } from "./AddWorkoutForm" 
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { WorkoutEntry } from "../types";
 
-const STORAGE_KEY = 'workoutEntries';
-
-export function TrainingPage() {
-    const [workouts, setWorkouts] = useLocalStorage<WorkoutEntry[]>(STORAGE_KEY, []);
+export function TrainingPage({setWorkouts}: {setWorkouts: React.Dispatch<React.SetStateAction<WorkoutEntry[]>>}) {
+    
 
     const handleAddWorkout = (workout: Omit<WorkoutEntry, "id">) => {
         setWorkouts(prev => [

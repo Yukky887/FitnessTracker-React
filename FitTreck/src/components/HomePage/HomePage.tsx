@@ -1,12 +1,12 @@
 import { AddEntryForm } from "./AddEntryForm";
 import { TrainingCalendar } from "./TrainingCalendar";
-import type { WeightEntry } from '../../types'
+import type { WeightEntry, WorkoutEntry } from '../../types'
 import { useNavigate } from "react-router-dom";
 import { WeightChart } from "../WeightChart";
 import { useWeightStats } from "../../hooks/useWeightStats";
 import "./HomePage.css";
 
-export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setEntries: React.Dispatch<React.SetStateAction<WeightEntry[]>> }) {
+export function HomePage({ entries, workouts, setEntries }: { entries: WeightEntry[], workouts: WorkoutEntry[], setEntries: React.Dispatch<React.SetStateAction<WeightEntry[]>> }) {
     const navigate = useNavigate();
 
     const { points } = useWeightStats(entries, "month")
@@ -55,7 +55,7 @@ export function HomePage({ entries, setEntries }: { entries: WeightEntry[], setE
                     <AddEntryForm onAddEntry={handleAddEntry} />
                 </details>
             </section>
-            <TrainingCalendar workoutDates={["2025-12-19", "2025-12-18", "2025-12-15"]} />
+            <TrainingCalendar workoutDates={workouts.map(w => w.date)} />
         </div>
     );
 }
