@@ -53,7 +53,7 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
                         key={cell.date} 
                         className={`square ${isWorkoutDate(cell.date) ? "square-active" : ""}`} 
                         title={cell.date} 
-                        onClick={() => navigate("/training")}
+                        onClick={() => navigate(`/training/${cell.date}`)}
                     />
                 ))}
             </div>
