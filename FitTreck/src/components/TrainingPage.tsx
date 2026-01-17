@@ -1,32 +1,50 @@
-import { AddWorkoutForm } from "./AddWorkoutForm" 
+import { AddWorkoutForm } from "./AddWorkoutForm"
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import type { WorkoutEntry } from "../types";
 
-export function TrainingPage({setWorkouts}: {setWorkouts: React.Dispatch<React.SetStateAction<WorkoutEntry[]>>}) {
-    
+
+export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dispatch<React.SetStateAction<WorkoutEntry[]>>, workouts: WorkoutEntry[] }) {
+
     const { date } = useParams<{ date: string }>();
 
     const trainingDate = date
         ? dayjs(date).format("DD.MM.YYYY")
-        : "Неизвестная дата"; 
+        : "Неизвестная дата";
 
     const handleAddWorkout = (workout: Omit<WorkoutEntry, "id">) => {
-        if (!date) return;
 
         setWorkouts(prev => [
             ...prev,
-            { 
+            {
                 ...workout,
-                date, 
-                id: crypto.randomUUID() }
+                id: crypto.randomUUID()
+            }
         ]);
     };
+
+    const workoutsForDay = date
+        ? workouts.filter(w => w.date === date)
+        : [];
 
     return (
         <div>
             <h1>Training for {trainingDate}</h1>
-            <AddWorkoutForm onAddWorkout={handleAddWorkout}/>
+            {workoutsForDay.length === 0 ? (
+                <p>Тренировок за этот день нет</p>
+            ) : (
+                <ul>
+                    {workoutsForDay.map(workout => (
+                        <li key={workout.id}>
+                            {workout.notes}
+                        </li>
+                    ))}
+                </ul>
+            )}
+            <details className="entry-form-container">
+                <summary>Добавить запись</summary>
+                <AddWorkoutForm calendarDate={date} workouts={workouts} onAddWorkout={handleAddWorkout} />
+            </details>
         </div>
     );
 }

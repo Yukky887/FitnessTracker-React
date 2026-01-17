@@ -22,8 +22,6 @@ export function HomePage({ entries, workouts, setEntries }: { entries: WeightEnt
         ? points[points.length - 1].weight
         : null;
 
-
-
     return (
         <div className="home-page">
             <h1>FitTrack</h1>

@@ -23,7 +23,7 @@ function App() {
                 element={<WeightStatsPage entries={entries} />} />
             <Route 
                 path="/training/:date"
-                element={<TrainingPage setWorkouts={setWorkouts} />} />
+                element={<TrainingPage workouts={workouts} setWorkouts={setWorkouts} />} />
         </Routes>
 
     )

@@ -4,13 +4,13 @@ import type { WorkoutEntry, WorkoutType } from "../types";
 import "./AddWorkoutForm.css";
 
 interface AddWorkoutFormProps {
-    defaultDate?: string;
+    calendarDate: string;
     onAddWorkout: (workout: Omit<WorkoutEntry, "id">) => void;
 }
 
-export function AddWorkoutForm({ defaultDate, onAddWorkout }: AddWorkoutFormProps) {
+export function AddWorkoutForm({ calendarDate, onAddWorkout }: AddWorkoutFormProps) {
     const [date, setDate] = useState<string>(
-        defaultDate || dayjs().format("YYYY-MM-DD")
+        calendarDate || dayjs().format("YYYY-MM-DD")
     );
     const [note, setNote] = useState<string>("");
     const [type, setType] = useState<WorkoutType>("Силовая");
@@ -26,7 +26,6 @@ export function AddWorkoutForm({ defaultDate, onAddWorkout }: AddWorkoutFormProp
             completed,
         })
 
-        setNote("");
         setType("Силовая");
         setCompleted(false);
     };
@@ -51,6 +50,7 @@ export function AddWorkoutForm({ defaultDate, onAddWorkout }: AddWorkoutFormProp
             </select>
             <textarea
                 placeholder="Заметка"
+                defaultValue={note.trim()}
                 value={note} onChange={e => setNote(e.target.value)}
                 className="workout-form__textarea"
             />
