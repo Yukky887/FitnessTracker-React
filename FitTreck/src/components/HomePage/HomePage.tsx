@@ -18,9 +18,20 @@ export function HomePage({ entries, workouts, setEntries }: { entries: WeightEnt
         ]);
     };
 
-    const currentWeight = points.length
+    const currentWeight = points.length 
         ? points[points.length - 1].weight
-        : null;
+        : null
+
+
+    const formattedWeight = ( weight: number | null ) => {
+        if (!weight) return null
+        
+        const [intPart, fracPart ] = weight.toString().split('.');
+        
+        return { intPart, fracPart }
+    }    
+
+    const weightParts = formattedWeight(currentWeight)
 
     return (
         <div className="home-page">
@@ -30,7 +41,12 @@ export function HomePage({ entries, workouts, setEntries }: { entries: WeightEnt
                 <h2>Текущий вес</h2>
                 <div className="weight-overlay">
                     <p className="current-weight">
-                        {currentWeight !== null ? `${currentWeight}` : "Нет данных"}
+                        {weightParts ? (
+                            <>
+                                <span className="weight-int">{weightParts.intPart}</span>
+                                <span className="weight-decimal">{weightParts.fracPart ? (`,${weightParts.fracPart}`) : null}</span>
+                            </>
+                        ) : "Нет данных"}
                     </p>
                     {points.length <= 2 ? (
                         <p>Недостаточно данных для графика</p>

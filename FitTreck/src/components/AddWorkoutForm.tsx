@@ -1,17 +1,13 @@
 import { useState } from "react";
-import dayjs from "dayjs";
-import type { WorkoutEntry, WorkoutType } from "../types";
+import type { ISODate, WorkoutEntry, WorkoutType } from "../types";
 import "./AddWorkoutForm.css";
 
 interface AddWorkoutFormProps {
-    calendarDate: string;
+    date: ISODate;
     onAddWorkout: (workout: Omit<WorkoutEntry, "id">) => void;
 }
 
-export function AddWorkoutForm({ calendarDate, onAddWorkout }: AddWorkoutFormProps) {
-    const [date, setDate] = useState<string>(
-        calendarDate || dayjs().format("YYYY-MM-DD")
-    );
+export function AddWorkoutForm({ date, onAddWorkout }: AddWorkoutFormProps) {
     const [note, setNote] = useState<string>("");
     const [type, setType] = useState<WorkoutType>("Силовая");
     const [completed, setCompleted] = useState<boolean>(false)
@@ -32,12 +28,6 @@ export function AddWorkoutForm({ calendarDate, onAddWorkout }: AddWorkoutFormPro
 
     return (
         <form onSubmit={handleSubmit} className="workout-form">
-            <input
-                type="date"
-                value={date}
-                onChange={e => setDate(e.target.value)}
-                className="workout-form__input workout-form__date"
-            />
             <select
                 value={type}
                 onChange={e => setType(e.target.value as WorkoutType)}

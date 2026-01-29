@@ -24,6 +24,10 @@
     position: relative;
 }
 
+.weight-decimal {
+    font-size: 100px;
+}
+
 .weight-overlay:hover .current-weight {
     filter: brightness(0.9);
     opacity: 0.8;

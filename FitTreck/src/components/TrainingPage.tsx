@@ -43,7 +43,7 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
             )}
             <details className="entry-form-container">
                 <summary>Добавить запись</summary>
-                <AddWorkoutForm calendarDate={date} workouts={workouts} onAddWorkout={handleAddWorkout} />
+                <AddWorkoutForm date={date} workouts={workouts} onAddWorkout={handleAddWorkout} />
             </details>
         </div>
     );

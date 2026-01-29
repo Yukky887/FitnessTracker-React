@@ -16,7 +16,7 @@ export interface WeightPoint {
 
 export interface WorkoutEntry {
     id: string;
-    date: string;
+    date: ISODate;
     type: WorkoutType;
     notes: string;
     completed: boolean;
