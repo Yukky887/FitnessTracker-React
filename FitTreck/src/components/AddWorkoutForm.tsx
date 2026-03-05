@@ -22,7 +22,7 @@ export function AddWorkoutForm({ date, onAddWorkout }: AddWorkoutFormProps) {
             completed,
         })
 
-        setType("Силовая");
+        setType(type);
         setCompleted(false);
     };
 

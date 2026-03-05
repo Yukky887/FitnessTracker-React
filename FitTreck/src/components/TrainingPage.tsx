@@ -21,6 +21,7 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
                 id: crypto.randomUUID()
             }
         ]);
+        console.log(workout)
     };
 
     const workoutsForDay = date
@@ -43,7 +44,7 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
             )}
             <details className="entry-form-container">
                 <summary>Добавить запись</summary>
-                <AddWorkoutForm date={date} workouts={workouts} onAddWorkout={handleAddWorkout} />
+                <AddWorkoutForm date={date} onAddWorkout={handleAddWorkout} />
             </details>
         </div>
     );

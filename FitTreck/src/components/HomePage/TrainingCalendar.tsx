@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import './TrainingCalendar.css';
 import { useNavigate } from "react-router-dom";
+import type { WorkoutType } from '../../types';
 
 type ISODate = string;
 
@@ -9,7 +10,7 @@ interface CalendarCell {
 }
 
 interface TrainingCalendarProps {
-    workoutDates: ISODate[];
+    workoutDates: Array<{ date: ISODate, type: WorkoutType }>;
 }
 
 export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
@@ -31,8 +32,30 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
         }
     )
 
-    const isWorkoutDate = (date: ISODate) => {
-        return workoutDates.includes(date);
+    console.log(workoutDates);
+
+
+    const getWorkoutsForDate = (date: ISODate) => {
+        return workoutDates.filter(w => w.date === date);
+    }
+
+    const getSquareClass = (date: ISODate) => {
+        const workouts = getWorkoutsForDate(date);
+
+        if (workouts.length === 0) return "square";
+
+        if (workouts.length > 1) return "square-multiple";
+
+        switch(workouts[0].type) {
+            case "Силовая":
+                return "square-strength";
+            case "Кардио":
+                return "square-cardio";
+            case "Другое":
+                return "square-somthing";
+            default:
+                return "square-active";
+        }
     }
 
     return (
@@ -46,16 +69,23 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
                 <p>Сб</p>
                 <p>Вс</p>
             </div>
-            <div
-                className="training-calendar">
-                {cells.map((cell) => (
-                    <div 
-                        key={cell.date} 
-                        className={`square ${isWorkoutDate(cell.date) ? "square-active" : ""}`} 
-                        title={cell.date} 
-                        onClick={() => navigate(`/training/${cell.date}`)}
-                    />
-                ))}
+            <div className="training-calendar">
+                {cells.map((cell) => {
+                    const workouts = getWorkoutsForDate(cell.date);
+                    const squareClass = getSquareClass(cell.date);
+                    const title = workouts.length > 0 
+                        ? `${cell.date}: ${workouts.map(w => w.type).join(', ')}`
+                        : cell.date;
+                    
+                    return (
+                        <div 
+                            key={cell.date} 
+                            className={squareClass}
+                            title={title}
+                            onClick={() => workouts.length > 0 && navigate(`/training/${cell.date}`)}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

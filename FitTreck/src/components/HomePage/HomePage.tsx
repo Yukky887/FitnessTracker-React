@@ -40,14 +40,16 @@ export function HomePage({ entries, workouts, setEntries }: { entries: WeightEnt
             <section>
                 <h2>Текущий вес</h2>
                 <div className="weight-overlay">
+
                     <p className="current-weight">
-                        {weightParts ? (
+                        {weightParts && points.length > 2 ? (
                             <>
                                 <span className="weight-int">{weightParts.intPart}</span>
                                 <span className="weight-decimal">{weightParts.fracPart ? (`,${weightParts.fracPart}`) : null}</span>
                             </>
-                        ) : "Нет данных"}
+                        ) : ""}
                     </p>
+
                     {points.length <= 2 ? (
                         <p>Недостаточно данных для графика</p>
                     ) : (
@@ -69,7 +71,10 @@ export function HomePage({ entries, workouts, setEntries }: { entries: WeightEnt
                     <AddEntryForm onAddEntry={handleAddEntry} />
                 </details>
             </section>
-            <TrainingCalendar workoutDates={workouts.map(w => w.date)} />
+            <TrainingCalendar workoutDates={workouts.map(w => ({
+                date: w.date,
+                type: w.type,
+            }))} />
         </div>
     );
 }
