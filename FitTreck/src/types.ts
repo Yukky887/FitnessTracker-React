@@ -22,4 +22,4 @@ export interface WorkoutEntry {
     completed: boolean;
 }
 
-export type WorkoutType = "Силовая" | "Кардио" | "Йога" | "Другое";
+export type WorkoutType = "Силовая" | "Кардио" | "Другое";

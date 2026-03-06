@@ -39,13 +39,69 @@ p {
     background-color: #202020;
 }
 
-.square-active {
-    background-color: #4CAF50;
+.square-active,
+.square-cardio,
+.square-other,
+.square-multiple {
     cursor: pointer;
     transition: box-shadow 0.4s, transform 0.4s;
 }
 
-.square-active:hover {
+.square-active:hover,
+.square-cardio:hover,
+.square-other:hover,
+.square-multiple:hover {
     transform: scale(1.2);
     box-shadow: 0 0 8px rgba(100, 175, 255, 0.8);
+}
+
+.square-active {
+    background-color: #4CAF50; 
+}
+
+.square-cardio {
+    background-color: #c9b24a;
+}
+
+.square-other {
+    background-color: #4ac9b2;
+}
+
+.square-multiple {
+    background: var(--gradient-type, linear-gradient(135deg, var(--color1) 50%, var(--color2) 50%));
+}
+
+.square-multiple[data-count="2"] {
+    background: linear-gradient(
+        135deg, 
+        var(--color1) 50%, 
+        var(--color2) 50%
+    );
+}
+
+/* Conic-gradient для 3 цветов */
+.square-multiple[data-count="3"] {
+    background: conic-gradient(
+        from 0deg,
+        var(--color1) 0deg 120deg,
+        var(--color2) 120deg 240deg,
+        var(--color3) 240deg 360deg
+    );
+}
+
+/* Для 4+ цветов - полоски */
+.square-multiple[data-count="4"],
+.square-multiple[data-count="5"],
+.square-multiple[data-count="6"] {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color1),
+        var(--color1) 3px,
+        var(--color2) 3px,
+        var(--color2) 6px,
+        var(--color3) 6px,
+        var(--color3) 9px,
+        var(--color4) 9px,
+        var(--color4) 12px
+    );
 }
