@@ -11,9 +11,18 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
     const trainingDate = date
         ? dayjs(date).format("DD.MM.YYYY")
         : "Неизвестная дата";
+        
+    const workoutsForDay = date
+        ? workouts.filter(w => w.date === date)
+        : [];
 
     const handleAddWorkout = (workout: Omit<WorkoutEntry, "id">) => {
 
+        if (date && workouts.some(w => w.date === date && w.type === workout.type)) {
+            alert(`незя такую же тренирку создавать, уже есть ${workout.type}`)
+            return
+        }
+        
         setWorkouts(prev => [
             ...prev,
             {
@@ -21,12 +30,9 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
                 id: crypto.randomUUID()
             }
         ]);
-        console.log(workout)
+
     };
 
-    const workoutsForDay = date
-        ? workouts.filter(w => w.date === date)
-        : [];
 
     return (
         <div>
@@ -44,7 +50,10 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
             )}
             <details className="entry-form-container">
                 <summary>Добавить запись</summary>
-                <AddWorkoutForm date={date} onAddWorkout={handleAddWorkout} />
+                <AddWorkoutForm 
+                    date={date} 
+                    onAddWorkout={handleAddWorkout}
+                    existingTypes={workoutsForDay.map(w => w.type)} />
             </details>
         </div>
     );

@@ -18,13 +18,6 @@ interface TrainingCalendarProps {
     workoutDates: Array<{ date: ISODate, type: WorkoutType }>;
 }
 
-const typeColors: Record<WorkoutType, string> = {
-    "Силовая": "#c94a4a",
-    "Кардио": "#c9b24a",
-    "Другое": "#4ac9b2"
-};
-
-
 export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
     const weeks = 26;
     const days = 7;
@@ -66,10 +59,10 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
             }
         }
 
-        const types = workout.map(w => w.type).sort();
-        const key = types.join('-').toLowerCase();
+        const uniqueTypes = [...new Set(workout.map(w => w.type).sort())]
+        const key = uniqueTypes.join('-').toLowerCase();
 
-        console.log(key)
+        console.log(key);
 
         const classMap: Record<string, string> = {
             'кардио-силовая': 'square-strength-cardio',
@@ -93,8 +86,11 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
             <div className="training-calendar">
                 {cells.map((cell) => {
                     const workouts = getWorkoutsForDate(cell.date);
+
+                    const uniqueTypes = [...new Set(workouts.map(w => w.type))]
+
                     const title = workouts.length > 0 
-                        ? `${cell.date}: ${workouts.map(w => w.type).join(', ')}`
+                        ? `${cell.date}: ${uniqueTypes.join(', ')}`
                         : cell.date;
 
                     return (

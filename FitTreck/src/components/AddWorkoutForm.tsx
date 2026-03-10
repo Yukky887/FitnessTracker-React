@@ -5,15 +5,28 @@ import "./AddWorkoutForm.css";
 interface AddWorkoutFormProps {
     date: ISODate;
     onAddWorkout: (workout: Omit<WorkoutEntry, "id">) => void;
+    existingTypes?: string[];
 }
 
-export function AddWorkoutForm({ date, onAddWorkout }: AddWorkoutFormProps) {
+export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWorkoutFormProps) {
     const [note, setNote] = useState<string>("");
     const [type, setType] = useState<WorkoutType>("Силовая");
     const [completed, setCompleted] = useState<boolean>(false)
 
+    const workoutTypes: WorkoutType[] = ["Силовая", "Кардио", "Другое"];
+
+    const availableTypes = workoutTypes.filter(t => !existingTypes.includes(t))
+
+    if (existingTypes.includes(type) && availableTypes.length > 0) {
+        setType(availableTypes[0]);
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (existingTypes.includes(type)) {
+            alert(`${type} тренировка, уже существует на эту дату`)
+        }
 
         onAddWorkout({
             date,
@@ -25,7 +38,7 @@ export function AddWorkoutForm({ date, onAddWorkout }: AddWorkoutFormProps) {
         setType(type);
         setCompleted(false);
     };
-
+    
     return (
         <form onSubmit={handleSubmit} className="workout-form">
             <select
@@ -35,7 +48,6 @@ export function AddWorkoutForm({ date, onAddWorkout }: AddWorkoutFormProps) {
             >
                 <option value="Силовая">Силовая</option>
                 <option value="Кардио">Кардио</option>
-                <option value="Йога">Йога</option>
                 <option value="Другое">Другое</option>
             </select>
             <textarea
