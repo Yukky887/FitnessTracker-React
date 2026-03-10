@@ -41,7 +41,10 @@ p {
 
 .square-active,
 .square-cardio,
+.square-strength,
 .square-other,
+.square-strength-cardio,
+.square-strength-cardio-other,
 .square-multiple {
     cursor: pointer;
     transition: box-shadow 0.4s, transform 0.4s;
@@ -49,7 +52,10 @@ p {
 
 .square-active:hover,
 .square-cardio:hover,
+.square-strength:hover,
 .square-other:hover,
+.square-strength-cardio:hover,
+.square-strength-cardio-other:hover,
 .square-multiple:hover {
     transform: scale(1.2);
     box-shadow: 0 0 8px rgba(100, 175, 255, 0.8);
@@ -57,6 +63,10 @@ p {
 
 .square-active {
     background-color: #4CAF50; 
+}
+
+.square-strength {
+    background-color: #c94a4a;
 }
 
 .square-cardio {
@@ -67,41 +77,15 @@ p {
     background-color: #4ac9b2;
 }
 
-.square-multiple {
-    background: var(--gradient-type, linear-gradient(135deg, var(--color1) 50%, var(--color2) 50%));
+.square-strength-cardio {
+    background: linear-gradient(135deg, #c94a4a 50%, #c9b24a 50%);
 }
 
-.square-multiple[data-count="2"] {
-    background: linear-gradient(
-        135deg, 
-        var(--color1) 50%, 
-        var(--color2) 50%
-    );
-}
-
-/* Conic-gradient для 3 цветов */
-.square-multiple[data-count="3"] {
+.square-strength-cardio-other {
     background: conic-gradient(
         from 0deg,
-        var(--color1) 0deg 120deg,
-        var(--color2) 120deg 240deg,
-        var(--color3) 240deg 360deg
-    );
-}
-
-/* Для 4+ цветов - полоски */
-.square-multiple[data-count="4"],
-.square-multiple[data-count="5"],
-.square-multiple[data-count="6"] {
-    background: repeating-linear-gradient(
-        45deg,
-        var(--color1),
-        var(--color1) 3px,
-        var(--color2) 3px,
-        var(--color2) 6px,
-        var(--color3) 6px,
-        var(--color3) 9px,
-        var(--color4) 9px,
-        var(--color4) 12px
+        #c94a4a 0deg 120deg,
+        #c9b24a 120deg 240deg,
+        #4ac9b2 240deg 360deg
     );
 }

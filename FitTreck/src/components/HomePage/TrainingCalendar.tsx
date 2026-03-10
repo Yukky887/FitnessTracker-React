@@ -48,35 +48,36 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
         return workoutDates.filter(w => w.date === date);
     }
 
-    const getWorkoutColors = (workouts: WorkoutInfo[]): string[] => {
-        return workouts.map(w => typeColors[w.type] || "#808080");
-    }
+    const getSingleClass = (date: ISODate): string => {
+        const workout = getWorkoutsForDate(date); 
 
-        const getSingleClass = (workout: WorkoutInfo): string => {
-        switch(workout.type) {
-            case "Силовая":
-                return "square-strength";
-            case "Кардио":
-                return "square-cardio";
-            case "Другое":
-                return "square-other";
-            default:
-                return "square-active";
+        if (workout.length === 0) {
+            return "square";  
+        } 
+        
+        if(workout.length === 1) {
+            switch(workout[0].type) {
+                case "Силовая":
+                    return "square-strength";
+                case "Кардио":
+                    return "square-cardio";
+                default:
+                    return "square-other";
+            }
         }
-    }
 
-    const getMultipleStyle = (workouts: WorkoutInfo[]): React.CSSProperties => {
-        const colors = getWorkoutColors(workouts);
-        
-        const style: React.CSSProperties = {};
-        colors.forEach((color, index) => {
-            style[`--color${index + 1}` as any] = color;
-        });
-        
-        style['--count' as any] = workouts.length;
-        
-        return style;
-    };
+        const types = workout.map(w => w.type).sort();
+        const key = types.join('-').toLowerCase();
+
+        console.log(key)
+
+        const classMap: Record<string, string> = {
+            'кардио-силовая': 'square-strength-cardio',
+            'другое-кардио-силовая': 'square-strength-cardio-other'
+        };
+
+        return classMap[key] || "square-multiple";
+    }
 
     return (
         <div className="training-calendar-container">
@@ -96,23 +97,12 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
                         ? `${cell.date}: ${workouts.map(w => w.type).join(', ')}`
                         : cell.date;
 
-                        let className = "square";
-                        let style: React.CSSProperties = {};
-                        
-                        if (workouts.length === 1) {
-                            className = getSingleClass(workouts[0]);
-                        } else if (workouts.length > 1) {
-                            className = "square-multiple";
-                            style = getMultipleStyle(workouts);
-                        }
-                    
                     return (
                         <div 
                             key={cell.date} 
-                            className={className}
-                            style={style}
-                            date-count={workouts.length > 1 ? workouts.length : undefined}
+                            className={getSingleClass(cell.date)}
                             title={title}
+                            date-count={workouts.length > 1 ? workouts.length : undefined}
                             onClick={() => navigate(`/training/${cell.date}`)}
                         />
                     );
