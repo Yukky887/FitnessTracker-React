@@ -39,6 +39,14 @@ export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWo
         setCompleted(false);
     };
     
+    if (availableTypes.length === 0) {
+        return (
+            <div className="workout-from__message">
+                <p>Все типы тренировок уже добавлены на эту дату</p>
+            </div>
+        );
+    }
+
     return (
         <form onSubmit={handleSubmit} className="workout-form">
             <select
@@ -46,9 +54,15 @@ export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWo
                 onChange={e => setType(e.target.value as WorkoutType)}
                 className="workout-form__select"
             >
-                <option value="Силовая">Силовая</option>
-                <option value="Кардио">Кардио</option>
-                <option value="Другое">Другое</option>
+                {workoutTypes.map(workoutTypes => (
+                    <option
+                        key={workoutTypes}
+                        value={workoutTypes}
+                        disabled={existingTypes.includes(workoutTypes)}
+                    >
+                        {workoutTypes} {existingTypes.includes(workoutTypes) ? "(уже было выполнено сегодня)" : ""}
+                    </option>
+                ))}
             </select>
             <textarea
                 placeholder="Заметка"
@@ -65,7 +79,15 @@ export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWo
                 />
                 Выполнена
             </label>
-            <button className="workout-form__button" type="submit">Добавить тренировку</button>
+            <button 
+                className="workout-form__button" 
+                type="submit"
+                disabled={existingTypes.includes(type)}        
+            >
+                {existingTypes.includes(type)
+                    ? "Этот тип уже добавлен"
+                    : "Добавить тренировку"}
+            </button>
         </form>
     );
 }
