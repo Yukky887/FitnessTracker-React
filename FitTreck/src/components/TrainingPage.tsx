@@ -40,7 +40,8 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
             {workoutsForDay.length === 0 ? (
                 <p>Тренировок за этот день нет</p>
             ) : (
-                <ul>
+                    /* добавить поля с выбором вида тренировки */
+                <ul>  
                     {workoutsForDay.map(workout => (
                         <li key={workout.id}>
                             {workout.notes}
