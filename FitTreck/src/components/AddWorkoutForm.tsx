@@ -33,6 +33,7 @@ export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWo
             type,
             notes: note.trim() || "",
             completed,
+            exercises: [],
         })
 
         setType(type);
@@ -66,7 +67,6 @@ export function AddWorkoutForm({ date, onAddWorkout, existingTypes = [] }: AddWo
             </select>
             <textarea
                 placeholder="Заметка"
-                defaultValue={note.trim()}
                 value={note} onChange={e => setNote(e.target.value)}
                 className="workout-form__textarea"
             />

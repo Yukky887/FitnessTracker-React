@@ -21,13 +21,13 @@ interface TrainingCalendarProps {
 export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
     const weeks = 26;
     const days = 7;
-    const rawDay = dayjs().day();
+    const today = dayjs().add(4, 'day');
+    const rawDay = today.day();
     const dayInWeek = rawDay === 0 ? 7 : rawDay;
     const totalCells = (weeks * days) - (7 - dayInWeek);
 
     const navigate = useNavigate();
 
-    const today = dayjs();
     const startDate = today.subtract(totalCells - 1, "day");
 
     const cells: CalendarCell[] = Array.from(
@@ -35,7 +35,7 @@ export function TrainingCalendar({ workoutDates }: TrainingCalendarProps) {
             const date = startDate.add(index, "day").format("YYYY-MM-DD");
             return { date };
         }
-    )
+    );
 
     const getWorkoutsForDate = (date: ISODate): WorkoutInfo[] => {
         return workoutDates.filter(w => w.date === date);

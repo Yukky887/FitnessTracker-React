@@ -1,12 +1,13 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import "./WeightChart.css";
 import { CustomTooltip } from "../CustomToltip";
+import { type WeightPoint } from "../types";
 
-export interface WeightPoint {
-    date: string;
-    label: string;
-    weight: number;
-}
+// export interface WeightPoint {
+//     date: string;
+//     label: string;
+//     weight: number;
+// }
 
 interface WeightChartProps {
     data: WeightPoint[];
