@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ISODate, WorkoutEntry, WorkoutType } from "../types";
+import type { ISODate, WorkoutEntry, WorkoutType } from "../../types";
 import "./AddWorkoutForm.css";
 
 interface AddWorkoutFormProps {

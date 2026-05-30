@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import { WeightStatsPage } from './components/WeightStatsPage';
-import { TrainingPage } from './components/TrainingPage';
+import { TrainingPage } from './components/TrainingPage/TrainingPage';
 import './App.css'
 import { useWeightEntries } from './hooks/useWeightEntries';
 import { useLocalStorage } from './hooks/useLocalStorage';

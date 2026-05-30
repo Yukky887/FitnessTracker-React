@@ -1,7 +1,7 @@
 import { AddWorkoutForm } from "./AddWorkoutForm"
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import type { WorkoutEntry } from "../types";
+import type { WorkoutEntry } from "../../types";
 
 
 export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dispatch<React.SetStateAction<WorkoutEntry[]>>, workouts: WorkoutEntry[] }) {
@@ -33,7 +33,6 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
 
     };
 
-
     return (
         <div>
             <h1>Training for {trainingDate}</h1>
@@ -52,7 +51,7 @@ export function TrainingPage({ setWorkouts, workouts }: { setWorkouts: React.Dis
             <details className="entry-form-container">
                 <summary>Добавить запись</summary>
                 <AddWorkoutForm 
-                    date={date} 
+                    date={date ?? ""} 
                     onAddWorkout={handleAddWorkout}
                     existingTypes={workoutsForDay.map(w => w.type)} />
             </details>
